@@ -9,12 +9,14 @@ import { uri } from './components/shared/Uri'
 
 function App() {
   const [productos, setProductos] = useState([]);
+  const [cargando, setCargando] = useState(true);
   const [recargar, setRecargar] = useState(true);
   useEffect(() => {
     if (recargar) {
       const consultarApi = async () =>{
-        const productosConsulta = await axios.get(uri+'/productos')
-        setProductos(productosConsulta.data)
+        const productosConsulta = await axios.get(uri+'/productos');
+        setProductos(productosConsulta.data);
+        setCargando(false);
       }
       consultarApi();
 
@@ -31,12 +33,14 @@ function App() {
         <Route exact path='/'
          render={() => (
           <Productos productos={productos}
-          setRecargar={setRecargar} />
+          setRecargar={setRecargar}
+          cargando={cargando} />
         )} />
         <Route exact path='/productos'
          render={() => (
           <Productos productos={productos}
-          setRecargar={setRecargar} />
+          setRecargar={setRecargar}
+          cargando={cargando} />
         )} />
         <Route exact path='/nuevoproducto' 
         render={() => (
