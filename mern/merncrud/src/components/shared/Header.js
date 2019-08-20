@@ -1,8 +1,8 @@
 import React from 'react';
 import {Link, NavLink} from 'react-router-dom';
 
-function Header() {
-
+function Header({autenticado}) {
+if (window.location.pathname === '/login') return null
     return ( 
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
             <div className="container">

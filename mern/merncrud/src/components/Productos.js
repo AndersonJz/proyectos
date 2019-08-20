@@ -1,7 +1,13 @@
 import React, { Fragment } from 'react';
 import ListaProductos from './ListaProductos'
+import NoLogeado from './shared/NoLogeado'
 
-function Productos({productos, setRecargar, cargando}) {
+function Productos({productos, setRecargar, cargando, autenticado}) {
+    if (autenticado === false) {
+        return (
+            <NoLogeado />
+        )
+    }
     if (Object.keys(productos).length === 0 && cargando === true) {
         return (
             <div className="text-center">

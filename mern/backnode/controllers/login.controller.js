@@ -14,9 +14,9 @@ loginCtrl.postLogin = async(req, res, next) => {
         const token = jwt.sign(result.toJSON(), process.env.SECRET, {
             expiresIn: 43200,
         });
-        res.json(token)
+        res.status(200).json(token)
     } else {
-        res.json({ msg: 'Usuario o contraseña incorrectos' })
+        res.status(401).json({ msg: 'Usuario o contraseña incorrectos' })
     }
 }
 
