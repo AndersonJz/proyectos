@@ -3,7 +3,13 @@ import ListaProductos from './ListaProductos'
 
 function Productos({productos, setRecargar, cargando}) {
     if (Object.keys(productos).length === 0 && cargando === true) {
-        return <div className="lds-ellipsis mt-5"><div></div><div></div><div></div><div></div></div>
+        return (
+            <div className="text-center">
+                <h1 className="text-center">Cargando...</h1>
+                <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+            </div>
+            
+        )
     }
     
     if (Object.keys(productos).length === 0 && cargando === false) {

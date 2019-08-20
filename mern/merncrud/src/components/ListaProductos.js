@@ -25,7 +25,7 @@ function ListaProductos({setRecargar, producto}) {
             reverseButtons: true
           }).then( async (result) => {
             if (result.value) {
-              const resultado = await axios.delete(uri + '/productos/'+ _id)
+              await axios.delete(uri + '/productos/'+ _id)
               setRecargar(true)
               swalWithBootstrapButtons.fire(
                 '¡Eliminado!',
