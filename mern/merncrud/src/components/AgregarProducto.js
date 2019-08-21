@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Error from './shared/Error';
 import axios from "axios";
 import { uri } from "./shared/Uri";
+import NoLogeado from './shared/NoLogeado';
 import Swal from 'sweetalert2'
 import { withRouter } from 'react-router-dom'
-function AgregarProducto({history, setRecargar, producto}) {
+function AgregarProducto({history, setRecargar, producto, autenticado}) {
 let titulo = 'Agregar Producto';
   const [nombrePlatillo, setNombrePlatillo] = useState("");
   const [precioPlatillo, setPrecioPlatillo] = useState(0);
@@ -77,6 +78,12 @@ useEffect(()=> {
     setRecargar(true)
     history.push('/productos')
   };
+
+  if (autenticado === false) {
+    return (
+        <NoLogeado />
+    )
+}
 
   return (
     <div className="col-md-8 mx-auto ">

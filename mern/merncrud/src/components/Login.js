@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
+import { withRouter } from "react-router-dom";
 import axios from 'axios';
 import { uri } from '../components/shared/Uri';
 import { setToken } from '../components/services/AuthService';
 
-function Login({setAutenticado}) {
-  console.log(setAutenticado);
-  
+function Login({setAutenticado, history}) {
 const [usuario, setUsuario] = useState('');
 const [password, setPassword] = useState('');
 const validarLogin = async e => {
@@ -13,9 +12,15 @@ const validarLogin = async e => {
     const resultado = await axios.post(uri + '/login', {
         usuario,
         password
-    })
+    }).catch(err => {
+      alert('Usuario o Contraseña incorrectos')
+      return;
+    });
+    if (resultado) {
     setToken(resultado.data);
     setAutenticado(true)
+    history.push('/productos')
+    } 
 }
     return (
         <div id="login">
@@ -32,9 +37,9 @@ const validarLogin = async e => {
                   </div>
                   <div className="form-group">
                     <label htmlFor="password" className="text-info">Password:</label><br />
-                    <input type="text" name="password" id="password" className="form-control" onChange={e => setPassword(e.target.value)}/>
+                    <input type="password" name="password" id="password" className="form-control" onChange={e => setPassword(e.target.value)}/>
                   </div>
-                  <div className="form-group">
+                  <div className="form-group text-center">
                     <input type="submit" name="submit" className="btn btn-info btn-md" defaultValue="submit" />
                   </div>
                 </form>
@@ -46,4 +51,4 @@ const validarLogin = async e => {
     )
 }
 
-export default Login;
+export default withRouter(Login);
