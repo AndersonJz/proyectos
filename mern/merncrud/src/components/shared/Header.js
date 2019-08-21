@@ -1,12 +1,59 @@
 import React, { Fragment } from 'react';
 import {Link, NavLink, withRouter } from 'react-router-dom';
 import { deleteToken } from '../services/AuthService'
+import Swal from 'sweetalert2';
 
 function Header({autenticado, setAutenticado, history}) {
 const cerrarSesion = () =>{
-    deleteToken();
-    setAutenticado(false);
-    history.push('/');
+
+    try {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: 'btn btn-success',
+              cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+          })
+          
+          swalWithBootstrapButtons.fire({
+            title: '¿Esta Seguro?',
+            text: "¡Va a cerrar sesión!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Si',
+            cancelButtonText: 'No, ¡Cancelar!',
+            reverseButtons: true
+          }).then( async (result) => {
+            if (result.value) {
+                deleteToken();
+                setAutenticado(false);
+                history.push('/');
+              swalWithBootstrapButtons.fire(
+                '¡Adiós!',
+                'Sesión Cerrada',
+                'warning'
+              )
+            } else if (
+              /* Read more about handling dismissals below */
+              result.dismiss === Swal.DismissReason.cancel
+            ) {
+              swalWithBootstrapButtons.fire(
+                'Cancelado',
+                '¡Puede seguir trabajando! :)',
+                'success'
+              )
+            }
+          })
+  
+       } catch (error) {
+           console.log(error);
+           Swal.fire({
+            type: 'error',
+            title: '¡Algo anda mal!',
+            text: 'Por favor vuelve a intentarlo',
+          })
+       }
+
 }
 if (autenticado === false) {
     return null

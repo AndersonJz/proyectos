@@ -24,7 +24,7 @@ function Productos({productos, setRecargar, cargando, autenticado}) {
     
     return (
         <Fragment>
-            <h1 className="text-center">Productos</h1>
+            <h1 className="text-center animated fadeInUp">Productos</h1>
             <ul className="list-group mt-5">
                 {productos.map(producto => (
                     <ListaProductos key={producto._id} producto={producto}

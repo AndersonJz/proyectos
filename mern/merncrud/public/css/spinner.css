@@ -35,6 +35,27 @@
     animation: lds-ellipsis3 0.6s infinite;
 }
 
+li {
+  opacity: 0;
+  animation: fadeIn 0.9s 1;
+  animation-fill-mode: forwards;
+}
+
+li:nth-child(5n+1) {
+  animation-delay: 0.5s;
+}
+
+/*...*/
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0.0;
+  }
+  100% {
+    opacity: 1.0;
+  }
+}
+
 @keyframes lds-ellipsis1 {
     0% {
         transform: scale(0);

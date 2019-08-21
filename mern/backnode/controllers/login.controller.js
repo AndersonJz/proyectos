@@ -12,7 +12,7 @@ loginCtrl.postLogin = async(req, res, next) => {
         const bash = async () => {
             const pass = await bcrypt.compare(req.body.password, result.password)
             if (pass) {
-                const token = jwt.sign(result.toJSON(), 'hollymolly', {
+                const token = jwt.sign(result.toJSON(), process.env.SECRET, {
                     expiresIn: 43200,
                 });
                 res.status(200).json(token)

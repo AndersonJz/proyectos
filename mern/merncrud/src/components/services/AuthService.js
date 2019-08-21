@@ -43,7 +43,7 @@ return (
      )}} />
            <Header autenticado={autenticado} 
            setAutenticado={setAutenticado}/>
-      <main className="conytainer mt-5">
+      <main className="container mt-5">
       <Switch>
         <Route exact path='/productos'
          render={() => {

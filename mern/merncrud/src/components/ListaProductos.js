@@ -55,12 +55,13 @@ function ListaProductos({setRecargar, producto}) {
     }
 
     return(
-        <li data-categoria={producto.categoria} className="list-group-item d-flex justify-content-between align-items-center">
-            <p>
+        <li data-categoria={producto.categoria}
+       className="list-group-item d-flex justify-content-between align-items-center row">
+            <p className="col-md-push-1">
                 {producto.nombrePlatillo} {''}
                 <span className="font-weigtht-bold">${producto.precioPlatillo}</span>
             </p>
-            <div>
+            <div className="col-md-push-1">
                 <Link 
                     to={`/productos/editar/${producto._id}`}
                     className="btn btn-success mr-2">

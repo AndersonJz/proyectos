@@ -3,13 +3,13 @@ import Error from './shared/Error';
 import axios from "axios";
 import { uri } from "./shared/Uri";
 import NoLogeado from './shared/NoLogeado';
-import Swal from 'sweetalert2'
-import { withRouter } from 'react-router-dom'
+import Swal from 'sweetalert2';
+import { withRouter } from 'react-router-dom';
 function AgregarProducto({history, setRecargar, producto, autenticado}) {
 let titulo = 'Agregar Producto';
-  const [nombrePlatillo, setNombrePlatillo] = useState("");
+  const [nombrePlatillo, setNombrePlatillo] = useState('');
   const [precioPlatillo, setPrecioPlatillo] = useState(0);
-  const [categoria, setCategoria] = useState("");
+  const [categoria, setCategoria] = useState('');
   const [error, setError] = useState(false);
 
   if (producto) {
@@ -25,6 +25,10 @@ useEffect(()=> {
             setCategoria(producto.categoria)
         }
         traer();
+    } else {
+      setNombrePlatillo('')
+      setPrecioPlatillo(0)
+      setCategoria('')
     }
 }, [producto])
 
@@ -86,10 +90,10 @@ useEffect(()=> {
 }
 
   return (
-    <div className="col-md-8 mx-auto ">
-      <h1 className="text-center">{titulo}</h1>
+    <div className="col-md-8 mx-auto">
+      <h1 className="text-center animated fadeIn">{titulo}</h1>
       {error ? <Error mensaje={"Todos los campos deben estar llenos"} /> : null}
-      <form className="mt-5" onSubmit={agregarProducto}>
+      <form className="mt-5 animated fadeIn" onSubmit={agregarProducto}>
         <div className="form-group">
           <label>Nombre Platillo</label>
           <input
