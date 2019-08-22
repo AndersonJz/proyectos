@@ -6,6 +6,7 @@ import Header from '../shared/Header'
 import AgregarProducto from '../AgregarProducto'
 import Producto from '../Producto'
 import decode from 'jwt-decode'
+import Error404 from '../shared/Error404';
 
 export const  setToken = token => {
 sessionStorage.setItem('usertoken', token)
@@ -17,6 +18,12 @@ sessionStorage.removeItem('usertoken')
 }
 
 function AuthService({productos, setRecargar, cargando}) {
+  const NoMatchPage = () => {
+    return (
+      <Error404 />
+    );
+  };
+  
 
 const [autenticado, setAutenticado] = useState(false);
 
@@ -69,6 +76,7 @@ return (
               autenticado={autenticado}/>
             )
         }} />
+         <Route component={NoMatchPage} />
       </Switch>
       </main>
         </Fragment>
